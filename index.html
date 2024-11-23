@@ -1,309 +1,52 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+    <html lang="pt-BR">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Porcentagem de Naipes</title>
-    <style>
-        
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hospital São Lucas & Mendel</title>
+        <link rel="stylesheet" href="Style.css">
+    </head>
 
-        body {
-            margin: 50px;
-        }
+    <body>
+        <header class="header">
+            <div class="container">
+                <img src='logo.png' alt="logo" class="logo" />
+                <h1>HOSPITAL SÃO LUCAS & MENDEL</h1>
+                <nav class="navigation">
+                    <a href="sobre.html">Sobre</a>
+                    <a href="consulta.html">Agendamento Online</a> <!--Agendamento de consultas-->
+                    <a href="contato.html">Contato</a>
+                    <a href="pagina1.html">Login</a>
+                </nav>
+            </div>
+        </header>
 
-        input {
-            width: 50px;
-        }
+        <main class="corpo">
+            <section class="meio">
+                <h2>Bem-vindo ao Hospital São Lucas & Mendel</h2>
+                <section class="banner">
+                    <div class="slideshow-container">
+                        <div class="slide fade">
+                            <img src="Blue and Teal Geometric Photo Medical Facebook Cover.png" alt="Slide 1">
+                        </div>
+                        <div class="slide fade">
+                            <img src="ortopedia 2.jpg" alt="Slide 2" height="500" width="526">
+                        </div>
+                        <div class="slide fade">
+                            <img src="ultrassom.png" alt="Slide 3">
+                        </div>
+                        <script src="Js/Script.js"></script>
+                </section>
+                    <p>Cuidando de você e de sua família com excelência e dedicação.</p>
+                    <a href="sobre.html" class="btn">Saiba Mais</a>
+            </section>
+        </main>
 
-        table {
-            width: 100px;
-            margin-top: 0px;
-            border-collapse: collapse;
-        }
+        <footer class="footer">
+            <p>&copy; 2024 Hospital São Lucas & Mendel. Todos os direitos reservados.</p>
+        </footer>
+    </body>
 
-        th,
-        td {
-            border: 1px solid #000;
-            padding: 2px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #c2bfbf;
-        }
-
-        /* From Uiverse.io by Gaurav-WebDev */
-        .button {
-            height: 50px;
-            width: 200px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s ease-in-out;
-        }
-
-        .button:hover {
-            box-shadow: .5px .5px 150px #252525;
-        }
-
-        .type1::after {
-            content: "Calculo Realizado";
-            height: 50px;
-            width: 200px;
-            background-color: #008080;
-            color: #fff;
-            position: absolute;
-            top: 0%;
-            left: 0%;
-            transform: translateY(50px);
-            font-size: 1.2rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.5s ease-in-out;
-        }
-
-        .type1::before {
-            content: "Clique para Calcular";
-            height: 50px;
-            width: 200px;
-            background-color: #fff;
-            color: #008080;
-            position: absolute;
-            top: 0%;
-            left: 0%;
-            transform: translateY(0px) scale(1);
-            font-size: 1.2rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.5s ease-in-out;
-        }
-
-        .type1:hover::after {
-            transform: translateY(0) scale(1);
-        }
-
-        .type1:hover::before {
-            transform: translateY(-50px) scale(0) rotate(120deg);
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Contagem Musicos</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Categoria</th>
-                <th>Instrumento</th>
-                <th>Quantidade</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td rowspan="3">Cordas</td>
-                <td>Violinos</td>
-                <td><input type="number" id="violinos" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Violas</td>
-                <td><input type="number" id="violas" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Violoncelo</td>
-                <td><input type="number" id="violoncelo" value="0" min="0"></td>
-            </tr>
-
-            <tr>
-                <td rowspan="10">Madeira</td>
-                <td>Flautas</td>
-                <td><input type="number" id="flautas" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Acordeões</td>
-                <td><input type="number" id="acordoes" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Oboés</td>
-                <td><input type="number" id="oboes" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Clarinetas</td>
-                <td><input type="number" id="clarinetas" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Clarones</td>
-                <td><input type="number" id="clarones" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Fagotes</td>
-                <td><input type="number" id="fagotes" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Sax soprano</td>
-                <td><input type="number" id="saxSoprano" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Sax alto</td>
-                <td><input type="number" id="saxAlto" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Sax tenor</td>
-                <td><input type="number" id="saxTenor" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Sax barítono</td>
-                <td><input type="number" id="saxBaritono" value="0" min="0"></td>
-            </tr>
-
-            <tr>
-                <td rowspan="10">Metal</td>
-                <td>Trompete</td>
-                <td><input type="number" id="trompete" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Trompas</td>
-                <td><input type="number" id="trompas" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Trombones</td>
-                <td><input type="number" id="trombones" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Trombonitos</td>
-                <td><input type="number" id="trombonitos" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Eufônios</td>
-                <td><input type="number" id="eufonios" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Tubas</td>
-                <td><input type="number" id="tubas" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Cornet</td>
-                <td><input type="number" id="cornet" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Corne inglês</td>
-                <td><input type="number" id="corneIngles" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Fluegelhorn</td>
-                <td><input type="number" id="fluegelhorn" value="0" min="0"></td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="2"><strong>Total de Instrumentos:</strong></td>
-                <td id="totalInstrumentos"><b>0</b></td>
-            </tr>
-            <tr>
-                <td colspan="3"><button class="button type1" onclick="calcularPorcentagem()">Calcular Porcentagem</button></td>
-            </tr>
-        </tfoot>
-    </table>
-
-    <h2>Resultados</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Naipe</th>
-                <th>Porcentagem</th>
-            </tr>
-        </thead>
-        <tbody id="tabelaResultados">
-            <!-- Resultados serão inseridos aqui -->
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>Total das Porcentagens</th>
-                <th id="somaPorcentagens">0%</th>
-            </tr>
-        </tfoot>
-    </table>
-
-    <script>
-        // Função para calcular o total e a porcentagem de cada naipe
-        function calcularPorcentagem() {
-            const cordas = ["violinos", "violas", "violoncelo"];
-            const madeira = ["flautas", "acordoes", "oboes", "clarinetas", "clarones", "fagotes", "saxSoprano", "saxAlto", "saxTenor", "saxBaritono"];
-            const metal = ["trompete", "trompas", "trombones", "trombonitos", "eufonios", "tubas", "cornet", "corneIngles", "fluegelhorn"];
-
-            let totalCordas = 0;
-            let totalMadeira = 0;
-            let totalMetal = 0;
-            let totalInstrumentos = 0;
-
-            // Função para calcular o total de uma categoria de instrumentos
-            function calcularTotal(naipe) {
-                return naipe.reduce((total, instrumento) => {
-                    const quantidade = parseInt(document.getElementById(instrumento).value) || 0;
-                    return total + quantidade;
-                }, 0);
-            }
-
-            // Calcula o total de cada naipe
-            totalCordas = calcularTotal(cordas);
-            totalMadeira = calcularTotal(madeira);
-            totalMetal = calcularTotal(metal);
-
-            // Calcula o total de instrumentos
-            totalInstrumentos = totalCordas + totalMadeira + totalMetal;
-            document.getElementById("totalInstrumentos").textContent = totalInstrumentos;
-
-            // Evita divisão por zero se nenhum instrumento foi adicionado
-            if (totalInstrumentos === 0) {
-                document.getElementById("tabelaResultados").innerHTML = "<tr><td colspan='2'>Nenhum instrumento foi adicionado.</td></tr>";
-                document.getElementById("somaPorcentagens").textContent = "0%";
-                return;
-            }
-
-            // Calcula e exibe a porcentagem de cada naipe
-            const porcentagemCordas = (totalCordas / totalInstrumentos * 100).toFixed(2);
-            const porcentagemMadeira = (totalMadeira / totalInstrumentos * 100).toFixed(2);
-            const porcentagemMetal = (totalMetal / totalInstrumentos * 100).toFixed(2);
-
-            // Calcula a soma das porcentagens
-            const somaPorcentagens = (parseFloat(porcentagemCordas) + parseFloat(porcentagemMadeira) + parseFloat(porcentagemMetal)).toFixed(2);
-
-            // Atualiza a tabela com os resultados
-            document.getElementById("tabelaResultados").innerHTML = `
-                <tr>
-                    <td>Cordas</td>
-                    <td>${porcentagemCordas}%</td>
-                </tr>
-                <tr>
-                    <td>Madeira</td>
-                    <td>${porcentagemMadeira}%</td>
-                </tr>
-                <tr>
-                    <td>Metal</td>
-                    <td>${porcentagemMetal}%</td>
-                </tr>
-            `;
-
-            // Exibe a soma das porcentagens no rodapé da tabela
-            document.getElementById("somaPorcentagens").textContent = `${somaPorcentagens}%`;
-        }
-    </script>
-
-    <img src="./Imagens/1.jpg" alt="Guia De Instrumentos">
-
-    <img src="./Imagens/2.jpg" alt="Guia De Instrumentos">
-
-    <img src="./Imagens/3.jpg" alt="Guia De Instrumentos">
-
-    <img src="./Imagens/Guia de instrumentos.jpeg" alt="Guia De Instrumentos">
-
-</body>
-
+    </html>
 </html>
