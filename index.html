@@ -60,19 +60,19 @@
 
         /* Responsividade com flexbox */
         .button-container {
-            display: flex;
+            display: inline-flexbox;
             justify-content: center;
             margin: 20px 0;
         }
 
         .results-container {
-            display: blck;
+            display: block;
             flex-direction: column;
             align-items: center;
         }
 
         /* Media Queries para responsividade */
-        @media screen and (max-width: 758px) {
+        @media screen and (max-width: 768px) {
 
             th,
             td {
@@ -89,7 +89,7 @@
             }
         }
 
-        @media screen and (max-width: 450px) {
+        @media screen and (max-width: 480px) {
 
             th,
             td {
@@ -281,10 +281,13 @@
         </table>
     </div>
 
-    <script>
-        let historicoEnsaio = [];
+    <div><img src="/Imagens/1.jpg" alt=""></div>
+    <div><img src="/Imagens/2.jpg" alt=""></div>
+    <div><img src="/Imagens/3.jpg" alt=""></div>
 
-        // Função para calcular o total de uma categoria de instrumentos
+    <script>
+        let historicoEnsaio = JSON.parse(localStorage.getItem("historicoEnsaio")) || [];
+
         function calcularTotal(naipe) {
             return naipe.reduce((total, instrumento) => {
                 const quantidade = parseInt(document.getElementById(instrumento).value) || 0;
@@ -292,106 +295,63 @@
             }, 0);
         }
 
-        // Função para calcular as porcentagens e mostrar os resultados
         function calcularPorcentagem() {
             const cordas = ["violinos", "violas", "violoncelo"];
             const madeira = ["flautas", "acordoes", "oboes", "clarinetas", "clarones", "fagotes", "saxSoprano", "saxAlto", "saxTenor", "saxBaritono"];
             const metal = ["trompete", "trompas", "trombones", "trombonitos", "eufonios", "tubas", "cornet", "corneIngles", "fluegelhorn"];
 
-            let totalCordas = 0;
-            let totalMadeira = 0;
-            let totalMetal = 0;
-            let totalInstrumentos = 0;
-
-            totalCordas = calcularTotal(cordas);
-            totalMadeira = calcularTotal(madeira);
-            totalMetal = calcularTotal(metal);
-            totalInstrumentos = totalCordas + totalMadeira + totalMetal;
+            let totalCordas = calcularTotal(cordas);
+            let totalMadeira = calcularTotal(madeira);
+            let totalMetal = calcularTotal(metal);
+            let totalInstrumentos = totalCordas + totalMadeira + totalMetal;
 
             document.getElementById("totalInstrumentos").textContent = totalInstrumentos;
 
             if (totalInstrumentos === 0) {
-                document.getElementById("tabelaResultados").innerHTML = "<tr><td colspan='2'>Nenhum instrumento foi adicionado.</td></tr>";
+                document.getElementById("tabelaResultados").innerHTML = "<tr><td colspan='3'>Nenhum instrumento foi adicionado.</td></tr>";
                 document.getElementById("somaPorcentagens").textContent = "0%";
                 return;
             }
 
-            const porcentagemCordas = (totalCordas / totalInstrumentos * 100).toFixed(2);
-            const porcentagemMadeira = (totalMadeira / totalInstrumentos * 100).toFixed(2);
-            const porcentagemMetal = (totalMetal / totalInstrumentos * 100).toFixed(2);
-
-            const somaPorcentagens = (parseFloat(porcentagemCordas) + parseFloat(porcentagemMadeira) + parseFloat(porcentagemMetal)).toFixed(2);
+            const porcentagemCordas = ((totalCordas / totalInstrumentos) * 100).toFixed(2);
+            const porcentagemMadeira = ((totalMadeira / totalInstrumentos) * 100).toFixed(2);
+            const porcentagemMetal = ((totalMetal / totalInstrumentos) * 100).toFixed(2);
 
             document.getElementById("tabelaResultados").innerHTML = `
-                <tr>
-                    <td>Cordas</td>
-                    <td>${porcentagemCordas}%</td>
-                    <td>${totalCordas}</td>
-                </tr>
-                <tr>
-                    <td>Madeira</td>
-                    <td>${porcentagemMadeira}%</td>
-                    <td>${totalMadeira}</td>
-                </tr>
-                <tr>
-                    <td>Metal</td>
-                    <td>${porcentagemMetal}%</td>
-                    <td>${totalMetal}</td>
-                </tr>
-            `;
-            document.getElementById("somaPorcentagens").textContent = `${somaPorcentagens}%`;
+            <tr>
+                <td>Cordas</td>
+                <td>${porcentagemCordas}%</td>
+                <td>${totalCordas}</td>
+            </tr>
+            <tr>
+                <td>Madeira</td>
+                <td>${porcentagemMadeira}%</td>
+                <td>${totalMadeira}</td>
+            </tr>
+            <tr>
+                <td>Metal</td>
+                <td>${porcentagemMetal}%</td>
+                <td>${totalMetal}</td>
+            </tr>
+        `;
+            document.getElementById("somaPorcentagens").textContent = `${(parseFloat(porcentagemCordas) + parseFloat(porcentagemMadeira) + parseFloat(porcentagemMetal)).toFixed(2)}%`;
         }
 
         function salvarEnsaio() {
-            const dataAtual = new Date();
-            const dataFormatada = dataAtual.toLocaleString();
+            const dataAtual = new Date().toLocaleString();
+            const instrumentos = Array.from(document.querySelectorAll("input[type='number']")).map(input => ({
+                id: input.id,
+                valor: parseInt(input.value) || 0
+            }));
 
-            const cordas = ["violinos", "violas", "violoncelo"];
-            const madeira = ["flautas", "acordoes", "oboes", "clarinetas", "clarones", "fagotes", "saxSoprano", "saxAlto", "saxTenor", "saxBaritono"];
-            const metal = ["trompete", "trompas", "trombones", "trombonitos", "eufonios", "tubas", "cornet", "corneIngles", "fluegelhorn"];
+            const porcentagens = document.getElementById("tabelaResultados").innerText.trim();
+            const totalPorcentagem = document.getElementById("somaPorcentagens").textContent;
 
-            const instrumentosContagem = [...cordas, ...madeira, ...metal].map(instrumento => {
-                return `${instrumento}: ${document.getElementById(instrumento).value || 0}`;
-            });
+            const novoEnsaio = { data: dataAtual, instrumentos, porcentagens, totalPorcentagem };
+            historicoEnsaio.push(novoEnsaio);
 
-            const porcentagensNaipe = [
-                `Cordas: ${(calcularTotal(cordas) / calcularTotal([...cordas, ...madeira, ...metal]) * 100).toFixed(2)}%`,
-                `Madeira: ${(calcularTotal(madeira) / calcularTotal([...cordas, ...madeira, ...metal]) * 100).toFixed(2)}%`,
-                `Metal: ${(calcularTotal(metal) / calcularTotal([...cordas, ...madeira, ...metal]) * 100).toFixed(2)}%`
-            ];
-
-            const ensaio = {
-                data: dataFormatada,
-                instrumentos: instrumentosContagem.join(", "),
-                porcentagensNaipe: porcentagensNaipe.join(", "),
-                porcentagens: document.getElementById("somaPorcentagens").textContent
-            };
-
-            historicoEnsaio.push(ensaio);
-
-            const ul = document.getElementById("historicoEnsaio").getElementsByTagName("tbody")[0];
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-                <td>${ensaio.data}</td>
-                <td>${ensaio.instrumentos}</td>
-                <td>${ensaio.porcentagensNaipe}</td>
-                <td>${ensaio.porcentagens}</td>
-                <td>
-                    <button onclick="editarEnsaio(${historicoEnsaio.length - 1})">Editar</button>
-                    <button onclick="apagarEnsaio(${historicoEnsaio.length - 1})">Excluir</button>
-                </td>
-            `;
-            ul.appendChild(tr);
-        }
-
-        function editarEnsaio(indice) {
-            const ensaio = historicoEnsaio[indice];
-            alert(`Editar Ensaio: \nData: ${ensaio.data}\nInstrumentos: ${ensaio.instrumentos}\nPorcentagens: ${ensaio.porcentagens}`);
-        }
-
-        function apagarEnsaio(indice) {
-            historicoEnsaio.splice(indice, 1);
             atualizarTabelaHistorico();
+            localStorage.setItem("historicoEnsaio", JSON.stringify(historicoEnsaio));
         }
 
         function atualizarTabelaHistorico() {
@@ -401,19 +361,35 @@
             historicoEnsaio.forEach((ensaio, indice) => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td>${ensaio.data}</td>
-                    <td>${ensaio.instrumentos}</td>
-                    <td>${ensaio.porcentagensNaipe}</td>
-                    <td>${ensaio.porcentagens}</td>
-                    <td>
-                        <button onclick="editarEnsaio(${indice})">Editar</button>
-                        <button onclick="apagarEnsaio(${indice})">Excluir</button>
-                    </td>
-                `;
+                <td>${ensaio.data}</td>
+                <td>${ensaio.instrumentos.map(inst => `${inst.id}: ${inst.valor}`).join(", ")}</td>
+                <td>${ensaio.porcentagens}</td>
+                <td>${ensaio.totalPorcentagem}</td>
+                <td>
+                    <button onclick="apagarEnsaio(${indice})">Excluir</button>
+                </td>
+            `;
                 tbody.appendChild(tr);
             });
         }
+
+        function apagarEnsaio(indice) {
+            historicoEnsaio.splice(indice, 1);
+            atualizarTabelaHistorico();
+            localStorage.setItem("historicoEnsaio", JSON.stringify(historicoEnsaio));
+        }
+
+        function carregarHistorico() {
+            if (historicoEnsaio.length > 0) {
+                atualizarTabelaHistorico();
+            }
+        }
+
+        // Carregar histórico ao iniciar a página
+        window.onload = carregarHistorico;
+
     </script>
+
 </body>
 
 </html>
