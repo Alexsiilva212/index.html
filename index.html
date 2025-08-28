@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contagem de Músicos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            padding: 10px;
+        }
+
+        .centraliza-tudo {
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid #000;
+            padding: 0;
+        }
+
+        .centraliza-tudo>table,
+        .centraliza-tudo>.main-table {
+            border: 3px solid #000;
+            margin: 1px;
+        }
+
+        h2,
+        h3 {
+            text-align: center;
+            margin: 0;
+        }
+
+        h3 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        td,
+        th {
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: left;
+            font-size: 14px;
+            white-space: nowrap;
+            width: 500px;
+        }
+
+        input[type="number"] {
+            width: 99%;
+            text-align: center;
+            border: none;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .total {
+            font-weight: bold;
+            background: #bcb8b8;
+            text-align: left;
+        }
+
+        .total-c {
+            font-weight: bold;
+            background: #bcb8b8;
+            text-align: center;
+        }
+
+        .instrumento {
+            text-align: center;
+
+        }
+
+        .footer {
+            margin-top: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #000;
+            font-size: 14px;
+            resize: none;
+        }
+
+        .actions {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            background: #2c7be5;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #1a5cb8;
+        }
+
+        .porcentagem-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .percent-simbolo {
+            margin-left: 4px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        @media print {
+            button {
+                display: none;
+            }
+
+            body {
+                padding: 0;
+                margin: 0;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+
+            body,
+            table,
+            td,
+            th {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="centraliza-tudo">
+        <table>
+            <tr>
+                <td>
+                    <h2>CONGREGAÇÃO CRISTÃ NO BRASIL</h2>
+                    <h3>Vila Nova Curuçá - São Paulo</h3>
+                    <h3 style="text-align: left;">
+                        ENSAIO LOCAL - <span id="data"></span>
+                    </h3>
+                    <script>
+                        const data = new Date();
+                        const opcoes = { day: '2-digit', month: '2-digit', year: 'numeric' };
+                        const dataFormatada = data.toLocaleDateString('pt-BR', opcoes);
+                        document.getElementById("data").innerText = dataFormatada;
+                    </script>
+                </td>
+            </tr>
+        </table>
+
+        <table class="main-table">
+            <tr>
+                <td>VIOLINOS</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>CORNET</td>
+                <td><input type="number" class="servico" value="0"></td>
+            </tr>
+            <tr>
+                <td>VIOLAS</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>FLUEGEHORN</td>
+                <td><input type="number" class="servico" value="0"></td>
+            </tr>
+            <tr>
+                <td>VIOLONCELOS</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>CORNE INGLES</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+            </tr>
+            <tr>
+                <td>FLAUTAS</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td class="total">TOTAL MÚSICOS</td>
+                <td id="totalMusicos" class="total-c">0</td>
+            </tr>
+            <tr>
+                <td>ACORDEÕES</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>OBOÉS</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>ORGANISTAS</td>
+                <td><input type="number" class="servico" value="0"></td>
+            </tr>
+            <tr>
+                <td>CLARINETAS</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>EXAMINADORAS</td>
+                <td><input type="number" class="servico" value="0"></td>
+            </tr>
+            <tr>
+                <td>CLARONES</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>ENC. REGIONAIS</td>
+                <td><input type="number" class="servico" value="0"></td>
+            </tr>
+            <tr>
+                <td>FAGOTES</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>ENC. LOCAIS</td>
+                <td><input type="number" class="servico" value="0"></td>
+            </tr>
+            <tr>
+                <td>SAX-SOPRANO</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>ANCIÃES</td>
+                <td><input type="number" class="servico" value="0"></td>
+            </tr>
+            <tr>
+                <td>SAX-ALTO</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>DIÁCONOS</td>
+                <td><input type="number" class="servico" value="0"></td>
+            </tr>
+            <tr>
+                <td>SAX-TENOR</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>COOPERADORES</td>
+                <td><input type="number" class="servico" value="0"></td>
+            </tr>
+            <tr>
+                <td>SAX-BARITONO</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td class="total">TOTAL GERAL</td>
+                <td id="totalGeral" class="total-c">0</td>
+            </tr>
+            <tr>
+                <td>TROMPETES</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>TROMPAS</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>TROMBONES</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td class="total">NAIPES</td>
+                <td class="total-c"><b>%</b></td>
+            </tr>
+            <tr>
+                <td>TROMBONITOS</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>CORDAS</td>
+                <td>
+                    <div class="porcentagem-wrapper">
+                        <input type="number" id="percCordas" class="porcentagem" min="0" max="100" value="0">
+                        <span class="percent-simbolo">%</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>EUFONIOS</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>MADEIRAS</td>
+                <td>
+                    <div class="porcentagem-wrapper">
+                        <input type="number" id="percMadeiras" class="porcentagem" min="0" max="100" value="0">
+                        <span class="percent-simbolo">%</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>TUBAS</td>
+                <td><input type="number" class="instrumento" value="0"></td>
+                <td>METAIS</td>
+                <td>
+                    <div class="porcentagem-wrapper">
+                        <input type="number" id="percMetais" class="porcentagem" min="0" max="100" value="0">
+                        <span class="percent-simbolo">%</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tfoot>
+                <tr>
+                    <td colspan="4" style="background-color: #f1f1f1; padding: 8px;">
+                        <b>HINOS ENSAIADOS:</b><br>
+                        <textarea style="width:100%; height:60px;"></textarea>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <button onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+    </div>
+
+    <script>
+        function atualizarTotais() {
+            let instrumentos = document.querySelectorAll('.instrumento');
+            let servicos = document.querySelectorAll('.servico');
+            let totalMusicos = 0;
+
+            instrumentos.forEach(i => totalMusicos += Number(i.value));
+
+            let cornetVal = 0, fluegehornVal = 0;
+            servicos.forEach(input => {
+                let nome = input.parentElement.previousElementSibling.innerText.trim().toUpperCase();
+                if (nome === "CORNET") cornetVal = Number(input.value);
+                if (nome === "FLUEGEHORN") fluegehornVal = Number(input.value);
+            });
+
+            totalMusicos += cornetVal + fluegehornVal;
+            document.getElementById('totalMusicos').innerText = totalMusicos;
+
+            let totalServicos = 0;
+            servicos.forEach(input => {
+                let nome = input.parentElement.previousElementSibling.innerText.trim().toUpperCase();
+                if (nome !== "CORNET" && nome !== "FLUEGEHORN") {
+                    totalServicos += Number(input.value);
+                }
+            });
+
+            document.getElementById('totalGeral').innerText = totalMusicos + totalServicos;
+        }
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', atualizarTotais);
+        });
+    </script>
+</body>
+
+</html>
