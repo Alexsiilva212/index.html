@@ -119,10 +119,16 @@
         }
 
         .porcentagem-wrapper {
-            width: 100%;
-            max-width: 55px;
-            /* você pode aumentar para 70 ou 80 se quiser mais espaço */
-            text-align: right;
+            white-space: nowrap;
+            /* evita quebra de linha */
+            max-width: 80px;
+            /* aumenta max-width pra caber número com 2 casas decimais */
+            display: inline-flex;
+            /* mantém os elementos alinhados na mesma linha */
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+            /* espaçamento entre input e símbolo de % */
             box-sizing: border-box;
             font-size: 14px;
         }
