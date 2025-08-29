@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contagem de Músicos</title>
     <style>
         body {
@@ -63,19 +64,20 @@
 
         .total {
             font-weight: bold;
-            background: #bcb8b8;
+            background-color: #bcb8b8 !important;
             text-align: left;
+            color: #000;
         }
 
         .total-c {
             font-weight: bold;
-            background: #bcb8b8;
+            background-color: #bcb8b8 !important;
             text-align: center;
+            color: #000;
         }
 
         .instrumento {
             text-align: center;
-
         }
 
         .footer {
@@ -141,6 +143,30 @@
             th {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+            }
+        }
+
+        /* Responsividade para celular */
+        @media screen and (max-width: 600px) {
+            .centraliza-tudo {
+                width: 100%;
+                border: none;
+                padding: 5px;
+            }
+
+            table,
+            td,
+            th {
+                font-size: 12px;
+                white-space: normal;
+            }
+
+            input[type="number"] {
+                font-size: 12px;
+            }
+
+            button {
+                width: 100%;
             }
         }
     </style>
