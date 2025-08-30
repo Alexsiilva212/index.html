@@ -340,10 +340,12 @@
         <tr>
           <td colspan="4" style="background-color: #f1f1f1; padding: 8px;">
             <b>HINOS ENSAIADOS:</b><br>
-            <textarea style="width:100%; height:60px;"></textarea>
+            <textarea id="hinos" placeholder="Digite os números separados por vírgula..."></textarea>
+            <p id="resumoHinos"><i>Foram ensaiados 0 hinos.</i></p>
           </td>
         </tr>
       </tfoot>
+
     </table>
 
     <button onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
@@ -397,6 +399,22 @@
     document.querySelectorAll('input').forEach(input => {
       input.addEventListener('input', atualizarTotais);
     });
+
+    //Aqui esta o Script para contar os hinos (caso queira alterar algo é só mexer aqui)
+
+    const hinosInput = document.getElementById("hinos");
+    const resumoHinos = document.getElementById("resumoHinos");
+
+    function atualizarResumoHinos() {
+      let texto = hinosInput.value;
+      // separa por vírgulas ou espaços e remove vazios
+      let numeros = texto.split(/[\s,]+/).filter(n => n.trim() !== "");
+      let total = numeros.length;
+
+      resumoHinos.innerHTML = `<b>Foram ensaiados o total de ${total} Hino${total !== 1 ? 's' : ''}.</b>`;
+    }
+
+    hinosInput.addEventListener("input", atualizarResumoHinos);
   </script>
 </body>
 
